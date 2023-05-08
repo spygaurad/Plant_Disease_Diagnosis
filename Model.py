@@ -204,8 +204,6 @@ class Model():
     
 
     def infer_a_random_sample(self, model_name):
-
-        self.model.load_state_dict(torch.load('saved_model/{model_name}.pth'))
         
         try:
             os.makedirs(f"test_samples/{model_name}", exist_ok=True)
@@ -261,9 +259,9 @@ class Model():
 
 
 
-model = Model()
-model.fit(300, 1e-3)
+model = Model(trained=True)
+# model.fit(300, 1e-3)
 
 
 for i in range(10):
-    model.infer_a_random_sample(MODEL_NAME)
+    model.infer_a_random_sample()
