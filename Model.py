@@ -53,12 +53,11 @@ class Model():
         running_correct = 0.0
         counter = 0
         
-        for i, x in tqdm(enumerate(dataset), total=len(dataset)):
-            print(x[0][0])
-            print(x[1][0])
+        for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
+  
 
             # print(label)
-            image, label = x[0][0].to(DEVICE), x[1][0].to(DEVICE)
+            image, label = img.to(DEVICE), label.to(DEVICE)
             outputs = self.model(image)
             loss = loss_func(outputs, label)
             running_loss += loss.item()
