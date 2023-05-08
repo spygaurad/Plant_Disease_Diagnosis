@@ -17,7 +17,7 @@ import csv
  
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # DEVICE = "cpu"
-BATCH_SIZE = 1
+BATCH_SIZE = 32
 MODEL_NAME = "TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_4"
  
  
@@ -55,9 +55,6 @@ class Model():
         
         for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
   
-            print(img.shape)
-            print(label)
-            # print(label)
             image, label = img.to(DEVICE), label.to(DEVICE)
             outputs = self.model(image)
             loss = loss_func(outputs, label)
