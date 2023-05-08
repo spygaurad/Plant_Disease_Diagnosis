@@ -203,7 +203,7 @@ class Model():
         print(f"The test accuracy for the model {MODEL_NAME} is: {test_acc}")
     
 
-    def infer_a_random_sample(self, model_name):
+    def infer_a_random_sample(self):
         
         try:
             os.makedirs(f"test_samples/{model_name}", exist_ok=True)
