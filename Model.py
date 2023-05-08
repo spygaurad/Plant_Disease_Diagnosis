@@ -234,7 +234,7 @@ class Model():
             draw = ImageDraw.Draw(image)
             draw.text((image.width - 200, 0), f"Real: {label}", fill='red')
             draw.text((image.width - 200, 20), f"Predicted: {pred_label}", fill='blue')
-            image.save(f"test_samples/{model_name}/{label} -> {pred_label}.jpg")
+            image.save(f"test_samples/{MODEL_NAME}/{label} -> {pred_label}.jpg")
             print("Saved a sample")
 
 
