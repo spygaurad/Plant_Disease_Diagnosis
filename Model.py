@@ -259,7 +259,7 @@ class Model():
 
 
 
-model = Model(trained=True)
+model = Model()
 model.fit(300, 1e-3)
 
 
