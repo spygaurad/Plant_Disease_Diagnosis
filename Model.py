@@ -55,7 +55,8 @@ class Model():
         
         for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
   
-
+            print(img.shape)
+            print(label)
             # print(label)
             image, label = img.to(DEVICE), label.to(DEVICE)
             outputs = self.model(image)
