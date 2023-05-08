@@ -167,7 +167,7 @@ class Model():
 
             print(f"Epoch No: {epoch}")
             train_loss, train_acc = self.train(dataset=train_data, loss_func=crossEntropyLoss, optimizer=optimizer)
-            val_acc = self.validate(dataset=val_data, epoch=epoch)
+            val_acc = self.validate(dataset=val_data)
             train_loss_epochs.append(train_loss)
             val_acc_epochs.append(val_acc)
             print(f"Train Loss:{train_loss}, Train Accuracy:{train_acc}, Validation Accuracy:{val_acc}")
@@ -191,6 +191,8 @@ class Model():
                 print("Model Saved")
             
             print("Epoch Completed. Proceeding to next epoch...")
+
+            break
 
         print(f"Training Completed for {epochs} epochs.")
         print(f"Testing the performance accuracy... ")  
