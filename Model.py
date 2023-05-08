@@ -206,7 +206,7 @@ class Model():
     def infer_a_random_sample(self):
         
         try:
-            os.makedirs(f"test_samples/{model_name}", exist_ok=True)
+            os.makedirs(f"test_samples/{MODEL_NAME}", exist_ok=True)
         except:
             pass
         
