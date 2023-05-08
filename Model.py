@@ -215,7 +215,7 @@ class Model():
             transforms.ToTensor(),
         ])
 
-        with open('test.csv', newline='') as csvfile:
+        with open('Dataset/Plant_Village/test.csv', newline='') as csvfile:
             csvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
             rows = list(csvreader)
             random_row = random.choice(rows)
