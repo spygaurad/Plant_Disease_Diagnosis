@@ -13,12 +13,10 @@ class CustomDataset(Dataset):
         with open(csv_file, 'r') as f:
             for row in f:
                 file_path, label = row.split(',')
-                label = label.strip()  # remove any leading/trailing whitespaces
-                print(label)
+                label = label.strip()  
                 if label not in self.class_to_idx:
                     self.class_to_idx[label] = len(self.class_to_idx)
                 label_idx = self.class_to_idx[label]
-                print(label_idx)
                 self.data.append((file_path, label_idx))
 
     def __getitem__(self, index):
