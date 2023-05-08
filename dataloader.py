@@ -3,15 +3,21 @@ from torch.utils.data import DataLoader, Dataset
 from torchvision.transforms import transforms, ToTensor, RandomRotation, RandomAffine, Resize, Normalize
 from PIL import Image
 
+
+
 class CustomDataset(Dataset):
     def __init__(self, csv_file, transform=None):
         self.transform = transform
         self.data = []
+        self.class_to_idx = {}
         with open(csv_file, 'r') as f:
             for row in f:
                 file_path, label = row.split(',')
-                label = int(label)
-                self.data.append((file_path, label))
+                label = label.strip()  # remove any leading/trailing whitespaces
+                if label not in self.class_to_idx:
+                    self.class_to_idx[label] = len(self.class_to_idx)
+                label_idx = self.class_to_idx[label]
+                self.data.append((file_path, label_idx))
 
     def __getitem__(self, index):
         file_path, label = self.data[index]
@@ -25,8 +31,6 @@ class CustomDataset(Dataset):
 
     def __len__(self):
         return len(self.data)
-
-
 
 
 
