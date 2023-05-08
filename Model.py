@@ -260,7 +260,7 @@ class Model():
 
 
 model = Model(trained=True)
-# model.fit(300, 1e-3)
+model.fit(300, 1e-3)
 
 
 for i in range(10):
