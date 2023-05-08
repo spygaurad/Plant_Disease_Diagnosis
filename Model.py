@@ -101,7 +101,6 @@ class Model():
 
     def test(self, dataset):
 
-        self.model.test()
         # self.model.load_state_dict(torch.load('saved_model/TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_3_200.pth'))
         running_correct = 0.0
         counter = 0
@@ -192,7 +191,6 @@ class Model():
             
             print("Epoch Completed. Proceeding to next epoch...")
 
-            break
 
         print(f"Training Completed for {epochs} epochs.")
         print(f"Testing the performance accuracy... ")  
