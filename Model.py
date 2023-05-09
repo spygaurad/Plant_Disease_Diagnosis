@@ -188,16 +188,17 @@ class Model():
                 torch.save(self.model.state_dict(), f"saved_model/{MODEL_NAME}_{epoch}.pth")
                 print("Model Saved")
             
+            if epoch%50==0:
+                test_acc = self.test(dataset=test_data)
+                writer.add_scalar("Accuracy/Test", test_acc)
+                print(f"The test accuracy for the model {MODEL_NAME} is: {test_acc}")
+    
             print("Epoch Completed. Proceeding to next epoch...")
 
 
         print(f"Training Completed for {epochs} epochs.")
         print(f"Testing the performance accuracy... ")  
 
-        test_acc = self.test(dataset=test_data)
-        writer.add_scalar("Accuracy/Test", test_acc)
-        print(f"The test accuracy for the model {MODEL_NAME} is: {test_acc}")
-    
 
     def infer_a_random_sample(self):
         
