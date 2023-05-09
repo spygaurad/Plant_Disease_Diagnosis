@@ -257,8 +257,8 @@ class Model():
 
 
 model = Model()
-model.fit(300, 1e-3)
+model.fit(1000, 5e-5)
 
 
-for i in range(10):
-    model.infer_a_random_sample()
+# for i in range(10):
+#     model.infer_a_random_sample()
