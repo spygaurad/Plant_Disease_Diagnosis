@@ -12,8 +12,8 @@ from PIL import Image
 from torchvision.transforms import transforms
 from tensorboardX import SummaryWriter
 import csv
- 
- 
+
+
  
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # DEVICE = "cpu"
@@ -36,15 +36,16 @@ class Model():
             2: "Tomato Healthy", 
             3: "Tomato Late Blight", 
             4: "Tomato Leaf Mold", 
-            5: "Tomato Septoria Leaf Spot", 
-            6: "Tomato Spider Mites", 
-            7: "Tomato Target Spot", 
-            8: "Tomato Mosiac Virus",
-            9: "Tomato Yellow Leaf Curl"
+            5: "Powdery Mildew",
+            6: "Tomato Septoria Leaf Spot", 
+            7: "Tomato Spider Mites", 
+            8: "Tomato Target Spot", 
+            9: "Tomato Mosiac Virus",
+            10: "Tomato Yellow Leaf Curl",
         }
 
- 
- 
+
+
     def train(self, dataset, loss_func, optimizer):
 
         self.model.train()
@@ -256,8 +257,8 @@ class Model():
 
 
 
-model = Model()
-model.fit(1000, 5e-5)
+# model = Model()
+# model.fit(1000, 5e-5)
 
 
 # for i in range(10):
