@@ -14,16 +14,16 @@ from tensorboardX import SummaryWriter
 import csv
 
 
- 
+
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # DEVICE = "cpu"
 BATCH_SIZE = 32
 MODEL_NAME = "TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_4"
 
 
- 
+
 class Model():
- 
+
     def __init__(self, trained=False):
         self.model = EfficientNet().to(DEVICE)
 
@@ -51,9 +51,9 @@ class Model():
         running_loss = 0.0
         running_correct = 0.0
         counter = 0
-        
+
         for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
-  
+
             image, label = img.to(DEVICE), label.to(DEVICE)
             outputs = self.model(image)
             loss = loss_func(outputs, label)
