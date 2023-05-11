@@ -5,7 +5,7 @@ import torch.nn as nn
 class EfficientNet(nn.Module):
     def __init__(self):
         super(EfficientNet, self).__init__()
-        self.model = timm.create_model('tf_efficientnetv2_b0', num_classes=11)
+        self.model = timm.create_model('tf_efficientnetv2_b0', num_classes=10)
     
     def forward(self, x):
         output = self.model(x)
