@@ -77,37 +77,69 @@ dataset_path = 'Dataset/Plant_Village'
 
 
 
-import csv
+# import csv
+# import os
+
+# def remove_files_and_rows(csv_file, start_row, end_row):
+#     with open(csv_file, 'r') as f:
+#         reader = csv.reader(f)
+#         rows = list(reader)
+
+#     # Validate start_row and end_row
+#     if start_row < 0 or end_row > len(rows) - 1:
+#         print("Invalid range of rows")
+#         return
+
+#     for i in range(start_row, end_row + 1):
+#         filepath = f'{dataset_path}/{rows[i][0]}'
+#         if os.path.isfile(filepath):
+#             os.remove(filepath)
+#             # print(f"Removed file: {filepath}")
+#         else:
+#             print(f"File not found: {filepath}")
+
+#     del rows[start_row:end_row + 1]
+
+#     with open(csv_file, 'w', newline='') as f:
+#         writer = csv.writer(f)
+#         writer.writerows(rows)
+
+#     print("Removed rows from the CSV file.")
+
+# # Usage example
+# csv_file = 'Dataset/Plant_Village/train.csv'
+# start_row = 12569
+# end_row = 25137
+# remove_files_and_rows(csv_file, start_row, end_row)
+
+
+
+
+
+
+
+
+# Just removes the generated files 
+
+
 import os
 
-def remove_files_and_rows(csv_file, start_row, end_row):
-    with open(csv_file, 'r') as f:
-        reader = csv.reader(f)
-        rows = list(reader)
+base_dir = "Dataset/Plant_Village/"
 
-    # Validate start_row and end_row
-    if start_row < 0 or end_row > len(rows) - 1:
-        print("Invalid range of rows")
-        return
+def remove_numerical_files(folder_path):
+    files = os.listdir(folder_path)
+    for file in files:
+        file_path = os.path.join(folder_path, file)
+        if os.path.isfile(file_path) and file[:-4].isdigit():
+            os.remove(file_path)
+            print(f"Removed file: {file_path}")
 
-    for i in range(start_row, end_row + 1):
-        filepath = f'{dataset_path}/{rows[i][0]}'
-        if os.path.isfile(filepath):
-            os.remove(filepath)
-            # print(f"Removed file: {filepath}")
-        else:
-            print(f"File not found: {filepath}")
-
-    del rows[start_row:end_row + 1]
-
-    with open(csv_file, 'w', newline='') as f:
-        writer = csv.writer(f)
-        writer.writerows(rows)
-
-    print("Removed rows from the CSV file.")
+def remove_numerical_files_in_folders():
+    folders = os.listdir(base_dir)
+    for folder in folders:
+        folder_path = os.path.join(base_dir, folder)
+        if os.path.isdir(folder_path):
+            remove_numerical_files(folder_path)
 
 # Usage example
-csv_file = 'Dataset/Plant_Village/train.csv'
-start_row = 12569
-end_row = 25137
-remove_files_and_rows(csv_file, start_row, end_row)
+remove_numerical_files_in_folders()
