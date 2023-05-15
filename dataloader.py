@@ -23,8 +23,8 @@ class CustomDataset(Dataset):
         file_path, label = self.data[index]
         try:
             image = Image.open(file_path).convert('RGB')
-        except:
-            print("Could not find the image...")
+        except e:
+            print(f"Could not find the image...{e}")
         if self.transform:
             image = self.transform(image)
         return image, label
