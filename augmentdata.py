@@ -96,6 +96,6 @@ def remove_files_and_rows(csv_file, start_row, end_row):
 
 # Usage example
 csv_file = 'Dataset/Plant_Village/train.csv'
-start_row = 12570
-end_row = 25137
+start_row = 12569
+end_row = 12569
 remove_files_and_rows(csv_file, start_row, end_row)
