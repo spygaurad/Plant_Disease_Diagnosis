@@ -122,24 +122,24 @@ dataset_path = 'Dataset/Plant_Village'
 # Just removes the generated files 
 
 
-import os
+# import os
 
-base_dir = "Dataset/Plant_Village/"
+# base_dir = "Dataset/Plant_Village/"
 
-def remove_numerical_files(folder_path):
-    files = os.listdir(folder_path)
-    for file in files:
-        file_path = os.path.join(folder_path, file)
-        if os.path.isfile(file_path) and file[:-4].isdigit():
-            os.remove(file_path)
-            print(f"Removed file: {file_path}")
+# def remove_numerical_files(folder_path):
+#     files = os.listdir(folder_path)
+#     for file in files:
+#         file_path = os.path.join(folder_path, file)
+#         if os.path.isfile(file_path) and file[:-4].isdigit():
+#             os.remove(file_path)
+#             print(f"Removed file: {file_path}")
 
-def remove_numerical_files_in_folders():
-    folders = os.listdir(base_dir)
-    for folder in folders:
-        folder_path = os.path.join(base_dir, folder)
-        if os.path.isdir(folder_path):
-            remove_numerical_files(folder_path)
+# def remove_numerical_files_in_folders():
+#     folders = os.listdir(base_dir)
+#     for folder in folders:
+#         folder_path = os.path.join(base_dir, folder)
+#         if os.path.isdir(folder_path):
+#             remove_numerical_files(folder_path)
 
-# Usage example
-remove_numerical_files_in_folders()
+# # Usage example
+# remove_numerical_files_in_folders()
