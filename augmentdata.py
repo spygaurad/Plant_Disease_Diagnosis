@@ -91,9 +91,9 @@ def remove_files_and_rows(csv_file, start_row, end_row):
         return
 
     for i in range(start_row, end_row + 1):
-        filepath = rows[i][0]
+        filepath = f'Dataset/Plant_Village/{rows[i][0]}'
         if os.path.isfile(filepath):
-            os.remove('Dataset/Plant_Village/', filepath)
+            os.remove(filepath)
             # print(f"Removed file: {filepath}")
         else:
             print(f"File not found: {filepath}")
