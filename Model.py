@@ -256,8 +256,8 @@ class Model():
 
 
 
-# model = Model()
-# model.fit(1000, 5e-5)
+model = Model()
+model.fit(1000, 5e-5)
 
 
 # for i in range(10):
