@@ -25,7 +25,7 @@ class CustomDataset(Dataset):
             image = Image.open(file_path).convert('RGB')
             if self.transform:
                 image = self.transform(image)
-        return image, label
+            return image, label
         except Exception as e:
             print(file_path)
 
