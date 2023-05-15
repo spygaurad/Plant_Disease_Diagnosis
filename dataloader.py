@@ -23,11 +23,11 @@ class CustomDataset(Dataset):
         file_path, label = self.data[index]
         try:
             image = Image.open(file_path).convert('RGB')
-        except:
-            print(f"Could not find the image...")
-        if self.transform:
-            image = self.transform(image)
-        return image, label
+            if self.transform:
+                image = self.transform(image)
+            return image, label
+        except Exception as e:
+            print(str(e))
 
     def __len__(self):
         return len(self.data)
