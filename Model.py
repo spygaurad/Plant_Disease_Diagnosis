@@ -144,6 +144,7 @@ class Model():
         print(f"Using {DEVICE} device...")
         print("Loading Datasets...")
         train_data, val_data, test_data = get_dataloader("Dataset/Plant_Village/", BATCH_SIZE)
+        print(f"Training Samples: {len(train_data)}\nValidation Samples: {len(val_data)}\nTesting Samples: {len(test_data)}")
         print("Dataset Loaded.")
         print("Initializing Parameters...")
         self.model = self.model.to(DEVICE)
