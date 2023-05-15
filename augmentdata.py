@@ -27,7 +27,7 @@ def apply_augmentations(image):
 
 # Set the paths
 dataset_path = 'Dataset/Plant_Village'
-train_csv_path = 'Dataset/Plant_Village/valid.csv'
+train_csv_path = 'Dataset/Plant_Village/test.csv'
 
 # Create a list to store the new rows for train.csv
 new_rows = []
