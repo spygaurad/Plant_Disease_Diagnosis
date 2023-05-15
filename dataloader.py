@@ -26,9 +26,7 @@ class CustomDataset(Dataset):
             if self.transform:
                 image = self.transform(image)
         except Exception as e:
-            image = torch.zeros(3, 244, 244).convert('RGB')
-            if self.transform:
-                image = self.transform(image)
+            print(file_path)
         return image, label
 
     def __len__(self):
