@@ -25,9 +25,9 @@ class CustomDataset(Dataset):
             image = Image.open(file_path).convert('RGB')
             if self.transform:
                 image = self.transform(image)
+        return image, label
         except Exception as e:
             print(file_path)
-        return image, label
 
     def __len__(self):
         return len(self.data)
