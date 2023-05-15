@@ -51,6 +51,7 @@ with open(train_csv_path, 'r') as csv_file:
         
         # Save the augmented image
         save_path = os.path.join(dataset_path, class_name, new_file_name)
+        print(save_path)
         augmented_image.save(save_path)
         
         # Add a new row to train.csv
