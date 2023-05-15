@@ -27,7 +27,7 @@ def apply_augmentations(image):
 
 # Set the paths
 dataset_path = 'Dataset/Plant_Village'
-train_csv_path = 'Dataset/Plant_Village/train.csv'
+train_csv_path = 'Dataset/Plant_Village/valid.csv'
 
 # Create a list to store the new rows for train.csv
 new_rows = []
@@ -47,7 +47,7 @@ with open(train_csv_path, 'r') as csv_file:
         augmented_image = apply_augmentations(image)
         
         # Generate a new random filename
-        new_file_name = f'{random.randint(1, 40000)}.jpg'
+        new_file_name = f'{random.randint(40000, 60000)}.jpg'
         
         # Save the augmented image
         save_path = os.path.join(dataset_path, class_name, new_file_name)
