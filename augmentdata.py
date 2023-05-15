@@ -26,7 +26,7 @@
 #     return image
 
 # # Set the paths
-# dataset_path = 'Dataset/Plant_Village'
+dataset_path = 'Dataset/Plant_Village'
 # train_csv_path = 'Dataset/Plant_Village/valid.csv'
 
 # # Create a list to store the new rows for train.csv
@@ -91,7 +91,7 @@ def remove_files_and_rows(csv_file, start_row, end_row):
         return
 
     for i in range(start_row, end_row + 1):
-        filepath = f'Dataset/Plant_Village/{rows[i][0]}'
+        filepath = f'{dataset_path}/{rows[i][0]}'
         if os.path.isfile(filepath):
             os.remove(filepath)
             # print(f"Removed file: {filepath}")
