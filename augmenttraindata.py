@@ -36,7 +36,7 @@ with open(train_csv_path, 'r') as csv_file:
         class_name = row[1]
         
         # Open the image
-        image_path = os.path.join(dataset_path, file_path)
+        image_path = os.path.join(file_path)
         image = Image.open(image_path)
         
         # Apply augmentations
