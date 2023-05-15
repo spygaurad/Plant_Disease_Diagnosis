@@ -24,7 +24,7 @@ class CustomDataset(Dataset):
         try:
             image = Image.open(file_path).convert('RGB')
         except:
-            return None, label
+            print("Could not find the image...")
         if self.transform:
             image = self.transform(image)
         return image, label
