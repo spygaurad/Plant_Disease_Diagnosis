@@ -254,7 +254,7 @@ class Model():
 
 
 model = Model()
-model.fit(1000, 5e-5)
+model.fit(1000, 1e-5)
 
 
 # for i in range(10):
