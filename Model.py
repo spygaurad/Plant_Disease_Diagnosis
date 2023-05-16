@@ -54,7 +54,6 @@ class Model():
         for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
 
             image, label = img.to(DEVICE), label.to(DEVICE)
-            print(label)
             outputs = self.model(image)
             loss = loss_func(outputs, label)
             running_loss += loss.item()
@@ -85,7 +84,6 @@ class Model():
         with torch.no_grad():
             for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
                 img, label = img.to(DEVICE), label.to(DEVICE)
-                print(label)
                 outputs = self.model(img)
                 #calculate accuracy
                 pred = outputs.argmax(1)
