@@ -50,8 +50,8 @@ def get_dataloader(root_dir, batch_size):
         Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
 
-    train_dataset = CustomDataset(os.path.join(root_dir, "valid.csv"), transform=train_transform)
-    val_dataset = CustomDataset(os.path.join(root_dir, "train.csv"), transform=val_transform)  # Resize validation images to 224x224
+    train_dataset = CustomDataset(os.path.join(root_dir, "train.csv"), transform=train_transform)
+    val_dataset = CustomDataset(os.path.join(root_dir, "valid.csv"), transform=val_transform)  # Resize validation images to 224x224
     test_dataset = CustomDataset(os.path.join(root_dir, "test.csv"), transform=val_transform)  # Resize validation images to 224x224
 
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
