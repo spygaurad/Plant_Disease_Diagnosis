@@ -29,6 +29,7 @@ class Model():
 
         if trained:
             self.model.load_state_dict(torch.load('saved_model/TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_4_190.pth', map_location=torch.device(DEVICE)))
+            print(f"Model Loaded: TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_4_190")
 
         self.classes = {
             0: "Tomato Bacterial Spot", 

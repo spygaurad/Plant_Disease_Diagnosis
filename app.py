@@ -14,6 +14,7 @@ def predict():
     image_file = Image.open(image_file)
     image_file = np.array(image_file)
     output = model.infer_a_sample(image_file)
+    print(output)
     return output
 
 
