@@ -47,20 +47,28 @@ for folder in folders:
     valid_files = files[num_train:num_train + num_valid]
     test_files = files[num_train + num_valid:]
 
-    # Filter out files with purely numerical filenames
-    train_files = [file for file in train_files if not re.match(r"^\d+\.jpg$", file)]
-    valid_files = [file for file in valid_files if not re.match(r"^\d+\.jpg$", file)]
-    test_files = [file for file in test_files if not re.match(r"^\d+\.jpg$", file)]
+    # Filter out files with purely numerical filenames from the test set
+    filtered_test_files = []
+    for file in test_files:
+        if not re.match(r"^\d+\.jpg$", file):
+            test_writer.writerow([os.path.join(folder_path, file), folder])
+        else:
+            filtered_test_files.append(file)
 
-    # Write the file paths and class names to the respective CSV files
+    # Distribute the excluded numerical files among train and valid sets
+    num_excluded = len(filtered_test_files)
+    num_train_excluded = int(num_excluded * 0.8)  # Ratio 4:1 for train and valid
+    num_valid_excluded = num_excluded - num_train_excluded
+
+    train_files.extend(filtered_test_files[:num_train_excluded])
+    valid_files.extend(filtered_test_files[num_train_excluded:])
+
+    # Write the file paths and class names to the train and valid CSV files
     for file in train_files:
         train_writer.writerow([os.path.join(folder_path, file), folder])
 
     for file in valid_files:
         valid_writer.writerow([os.path.join(folder_path, file), folder])
-
-    for file in test_files:
-        test_writer.writerow([os.path.join(folder_path, file), folder])
 
 # Close the CSV files
 train_file.close()
