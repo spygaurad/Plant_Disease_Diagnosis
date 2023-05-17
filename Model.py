@@ -85,11 +85,15 @@ class Model():
             for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
                 img, label = img.to(DEVICE), label.to(DEVICE)
                 outputs = self.model(img)
+                print(outputs)
                 #calculate accuracy
                 pred = outputs.argmax(1)
+                print(pred)
                 correct = pred == label
+                print(correct)
                 running_correct += correct.sum().item()
                 counter += 1
+                print(running_correct)
 
         # loss and accuracy for a complete epoch
         epoch_acc = 100. * (running_correct / (counter*BATCH_SIZE))
@@ -144,7 +148,7 @@ class Model():
         print(f"Using {DEVICE} device...")
         print("Loading Datasets...")
         train_data, val_data, test_data = get_dataloader("Dataset/Plant_Village/", BATCH_SIZE)
-        print(f"Training Samples: {len(train_data)}\nValidation Samples: {len(val_data)}\nTesting Samples: {len(test_data)}")
+        print(f"Training Samples: {len(train_data*BATCH_SIZE)}\nValidation Samples: {len(val_data*BATCH_SIZE)}\nTesting Samples: {len(test_data*BATCH_SIZE)}")
         print("Dataset Loaded.")
         print("Initializing Parameters...")
         self.model = self.model.to(DEVICE)
