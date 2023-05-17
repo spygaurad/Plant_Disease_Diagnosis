@@ -37,12 +37,11 @@ class Model():
             2: "Tomato Healthy", 
             3: "Tomato Late Blight", 
             4: "Tomato Leaf Mold", 
-            5: "Powdery Mildew",
-            6: "Tomato Septoria Leaf Spot", 
-            7: "Tomato Spider Mites", 
-            8: "Tomato Target Spot", 
-            9: "Tomato Mosiac Virus",
-            10: "Tomato Yellow Leaf Curl",
+            5: "Tomato Septoria Leaf Spot", 
+            6: "Tomato Spider Mites", 
+            7: "Tomato Target Spot", 
+            8: "Tomato Mosiac Virus",
+            9: "Tomato Yellow Leaf Curl",
         }
 
 
