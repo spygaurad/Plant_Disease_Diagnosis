@@ -85,15 +85,12 @@ class Model():
             for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
                 img, label = img.to(DEVICE), label.to(DEVICE)
                 outputs = self.model(img)
-                print(outputs)
+
                 #calculate accuracy
                 pred = outputs.argmax(1)
-                print(pred)
                 correct = pred == label
-                print(correct)
                 running_correct += correct.sum().item()
                 counter += 1
-                print(running_correct)
 
         # loss and accuracy for a complete epoch
         epoch_acc = 100. * (running_correct / (counter*BATCH_SIZE))
