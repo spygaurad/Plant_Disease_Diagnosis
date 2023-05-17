@@ -1,6 +1,7 @@
 import os
 import random
 import csv
+import re
 
 dataset_folder = "Dataset/Plant_Village"
 output_folder = "Dataset"
@@ -45,6 +46,11 @@ for folder in folders:
     train_files = files[:num_train]
     valid_files = files[num_train:num_train + num_valid]
     test_files = files[num_train + num_valid:]
+
+    # Filter out files with purely numerical filenames
+    train_files = [file for file in train_files if not re.match(r"^\d+\.jpg$", file)]
+    valid_files = [file for file in valid_files if not re.match(r"^\d+\.jpg$", file)]
+    test_files = [file for file in test_files if not re.match(r"^\d+\.jpg$", file)]
 
     # Write the file paths and class names to the respective CSV files
     for file in train_files:
