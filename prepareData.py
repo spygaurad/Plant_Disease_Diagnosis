@@ -82,7 +82,7 @@ import os
 import csv
 from shutil import copyfile
 
-csv_file = "test.csv"
+csv_file = "Dataset/Plant_Village/test.csv"
 output_folder = "Test"
 
 # Create the output folder if it doesn't exist
