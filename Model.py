@@ -241,7 +241,7 @@ class Model():
 
         # Forward pass the image through the model.
         prediction = self.model(image)
-
+        print(prediction)
         # Get the class with the highest probability.
         class_index = prediction.argmax(1)
 
