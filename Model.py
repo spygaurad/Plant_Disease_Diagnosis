@@ -238,6 +238,7 @@ class Model():
 
     def infer_a_sample(self, image):
         
+        image = torch.load("name.pt")
         image = image.to(DEVICE)
 
         # Forward pass the image through the model.
@@ -254,8 +255,8 @@ class Model():
 
 
 
-model = Model(trained=True)
-model.fit(400, 1e-5)
+# model = Model(trained=True)
+# model.fit(400, 1e-5)
  
 
 # for i in range(10):
