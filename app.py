@@ -18,7 +18,7 @@ transform = transforms.Compose([
 def predict():
     image_file = request.files['image']
     image_file = Image.open(image_file).convert('RGB')
-    image_file = transform(image_file)
+    image_file = transform(image_file).unsqueeze(0)
     output = model.infer_a_sample(image_file)
     print(output)
     return output
