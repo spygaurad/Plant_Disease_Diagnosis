@@ -168,28 +168,29 @@ class Model():
             # val_acc = self.validate(dataset=val_data)
             test_acc = self.test(dataset=test_data)
             train_loss_epochs.append(train_loss)
-            val_acc_epochs.append(val_acc)
-            test_acc_epochs.append(test_acc)
-            print(f"Train Loss:{train_loss}, Train Accuracy:{train_acc}, Validation Accuracy:{val_acc}, Test Accuracy: {test_acc}")
+            # val_acc_epochs.append(val_acc)
+            # test_acc_epochs.append(test_acc)
+            # print(f"Train Loss:{train_loss}, Train Accuracy:{train_acc}, Validation Accuracy:{val_acc}, Test Accuracy: {test_acc}")
+            print(f"Test Accuracy: {test_acc}")
 
-            if max(test_acc_epochs) == test_acc:
-                torch.save({
-                'epoch': epoch,
-                'model_state_dict': self.model.state_dict(),
-                'optimizer_state_dict': optimizer.state_dict(),
-                'train_loss': train_loss,
-                }, f"checkpoints/{MODEL_NAME}.tar")
+            # if max(test_acc_epochs) == test_acc:
+            #     torch.save({
+            #     'epoch': epoch,
+            #     'model_state_dict': self.model.state_dict(),
+            #     'optimizer_state_dict': optimizer.state_dict(),
+            #     'train_loss': train_loss,
+            #     }, f"checkpoints/{MODEL_NAME}.tar")
 
 
-            writer.add_scalar("Loss/train", train_loss, epoch)
-            writer.add_scalar("Accuracy/train", train_acc, epoch)
-            writer.add_scalar("Accuracy/val", val_acc, epoch)
-            writer.add_scalar("Accuracy/Test", test_acc, epoch)
+            # writer.add_scalar("Loss/train", train_loss, epoch)
+            # writer.add_scalar("Accuracy/train", train_acc, epoch)
+            # writer.add_scalar("Accuracy/val", val_acc, epoch)
+            # writer.add_scalar("Accuracy/Test", test_acc, epoch)
             
-            if epoch%10==0:
-                print("Saving model")
-                torch.save(self.model.state_dict(), f"saved_model/{MODEL_NAME}_{epoch}.pth")
-                print("Model Saved")
+            # if epoch%10==0:
+            #     print("Saving model")
+            #     torch.save(self.model.state_dict(), f"saved_model/{MODEL_NAME}_{epoch}.pth")
+            #     print("Model Saved")
     
             print("Epoch Completed. Proceeding to next epoch...")
 
