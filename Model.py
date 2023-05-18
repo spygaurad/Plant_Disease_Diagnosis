@@ -110,7 +110,7 @@ class Model():
             for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
                 img, label = img.to(DEVICE), label.to(DEVICE)
                 outputs = self.model(img)
-
+                print(outputs)
                 #calculate accuracy
                 pred = outputs.argmax(1)
                 correct = pred == label
