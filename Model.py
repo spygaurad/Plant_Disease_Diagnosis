@@ -17,7 +17,7 @@ import csv
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # DEVICE = "cpu"
-BATCH_SIZE = 32
+BATCH_SIZE = 8
 MODEL_NAME = "TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_4"
 
 
@@ -108,7 +108,7 @@ class Model():
         with torch.no_grad():
             for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
                 img, label = img.to(DEVICE), label.to(DEVICE)
-                print(img.shape)
+                img = img.permute(1, 0, 2, 3)
                 outputs = self.model(img)
                 #calculate accuracy
                 pred = outputs.argmax(1)
