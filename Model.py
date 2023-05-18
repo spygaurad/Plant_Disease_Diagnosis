@@ -165,8 +165,8 @@ class Model():
         for epoch in range(1, epochs+1):
 
             print(f"Epoch No: {epoch}")
-            train_loss, train_acc = self.train(dataset=train_data, loss_func=crossEntropyLoss, optimizer=optimizer)
-            val_acc = self.validate(dataset=val_data)
+            # train_loss, train_acc = self.train(dataset=train_data, loss_func=crossEntropyLoss, optimizer=optimizer)
+            # val_acc = self.validate(dataset=val_data)
             test_acc = self.test(dataset=test_data)
             train_loss_epochs.append(train_loss)
             val_acc_epochs.append(val_acc)
@@ -253,8 +253,8 @@ class Model():
 
 
 
-# model = Model()
-# model.fit(400, 1e-5)
+model = Model(trained=True)
+model.fit(400, 1e-5)
 
 
 # for i in range(10):
