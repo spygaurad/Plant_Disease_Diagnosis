@@ -104,7 +104,7 @@ class Model():
         running_correct = 0.0
         counter = 0
 
-        num = random.randint(0, len(dataset)//(BATCH_SIZE//2))
+        # num = random.randint(0, len(dataset)//(BATCH_SIZE//2))
 
         with torch.no_grad():
             for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
