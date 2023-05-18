@@ -108,6 +108,7 @@ class Model():
         with torch.no_grad():
             for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
                 img, label = img.to(DEVICE), label.to(DEVICE)
+                print(img.shape)
                 outputs = self.model(img)
                 #calculate accuracy
                 pred = outputs.argmax(1)
