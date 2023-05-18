@@ -116,21 +116,21 @@ class Model():
                 running_correct += correct.sum().item()
                 counter += 1
                 
-                if i == num:
-                    try:
-                        os.makedirs(f"saved_samples/{MODEL_NAME}", exist_ok=True)
-                    except:
-                        pass
-                    sample = random.randint(0, BATCH_SIZE//2)
-                    image = img[sample, :, :, :].cpu().numpy().transpose((1, 2, 0))
-                    image = (image * 255).astype('uint8')
-                    image = Image.fromarray(image)
-                    draw = ImageDraw.Draw(image)
-                    real_label = self.classes[label[sample].item()]
-                    pred_label = self.classes[pred[sample].item()]
-                    draw.text((image.width - 200, 0), f"Real: {real_label}", fill='red')
-                    draw.text((image.width - 200, 20), f"Predicted: {pred_label}", fill='blue')
-                    image.save(f"saved_samples/{MODEL_NAME}/{num}.jpg")
+                # if i == num:
+                #     try:
+                #         os.makedirs(f"saved_samples/{MODEL_NAME}", exist_ok=True)
+                #     except:
+                #         pass
+                #     sample = random.randint(0, BATCH_SIZE//2)
+                #     image = img[sample, :, :, :].cpu().numpy().transpose((1, 2, 0))
+                #     image = (image * 255).astype('uint8')
+                #     image = Image.fromarray(image)
+                #     draw = ImageDraw.Draw(image)
+                #     real_label = self.classes[label[sample].item()]
+                #     pred_label = self.classes[pred[sample].item()]
+                #     draw.text((image.width - 200, 0), f"Real: {real_label}", fill='red')
+                #     draw.text((image.width - 200, 20), f"Predicted: {pred_label}", fill='blue')
+                #     image.save(f"saved_samples/{MODEL_NAME}/{num}.jpg")
 
         # loss and accuracy for a complete epoch
         epoch_acc = 100. * (running_correct / (counter*BATCH_SIZE))
