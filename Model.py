@@ -237,6 +237,8 @@ class Model():
 
     def infer_a_sample(self, image):
         
+        image = image.to(DEVICE)
+
         # Forward pass the image through the model.
         prediction = self.model(image)
 
