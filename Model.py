@@ -254,9 +254,9 @@ class Model():
 
 
 
-# model = Model(trained=True)
-# model.fit(400, 1e-5)
-
+model = Model(trained=True)
+model.fit(400, 1e-5)
+ 
 
 # for i in range(10):
 #     model.infer_a_random_sample()
