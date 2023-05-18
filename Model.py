@@ -17,8 +17,8 @@ import csv
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # DEVICE = "cpu"
-BATCH_SIZE = 8
-MODEL_NAME = "TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_4"
+BATCH_SIZE = 4
+MODEL_NAME = "TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_5"
 
 
 
@@ -103,12 +103,11 @@ class Model():
         running_correct = 0.0
         counter = 0
 
-        # num = random.randint(0, len(dataset)//(BATCH_SIZE//2))
+        num = random.randint(0, len(dataset)-1)
 
         with torch.no_grad():
             for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
                 img, label = img.to(DEVICE), label.to(DEVICE)
-                img = img.permute(1, 0, 2, 3)
                 outputs = self.model(img)
                 #calculate accuracy
                 pred = outputs.argmax(1)
@@ -116,21 +115,21 @@ class Model():
                 running_correct += correct.sum().item()
                 counter += 1
                 
-                # if i == num:
-                #     try:
-                #         os.makedirs(f"saved_samples/{MODEL_NAME}", exist_ok=True)
-                #     except:
-                #         pass
-                #     sample = random.randint(0, BATCH_SIZE//2)
-                #     image = img[sample, :, :, :].cpu().numpy().transpose((1, 2, 0))
-                #     image = (image * 255).astype('uint8')
-                #     image = Image.fromarray(image)
-                #     draw = ImageDraw.Draw(image)
-                #     real_label = self.classes[label[sample].item()]
-                #     pred_label = self.classes[pred[sample].item()]
-                #     draw.text((image.width - 200, 0), f"Real: {real_label}", fill='red')
-                #     draw.text((image.width - 200, 20), f"Predicted: {pred_label}", fill='blue')
-                #     image.save(f"saved_samples/{MODEL_NAME}/{num}.jpg")
+                if i == num:
+                    try:
+                        os.makedirs(f"saved_samples/{MODEL_NAME}", exist_ok=True)
+                    except:
+                        pass
+                    sample = random.randint(0, BATCH_SIZE//2)
+                    image = img[sample, :, :, :].cpu().numpy().transpose((1, 2, 0))
+                    image = (image * 255).astype('uint8')
+                    image = Image.fromarray(image)
+                    draw = ImageDraw.Draw(image)
+                    real_label = self.classes[label[sample].item()]
+                    pred_label = self.classes[pred[sample].item()]
+                    draw.text((image.width - 200, 0), f"Real: {real_label}", fill='red')
+                    draw.text((image.width - 200, 20), f"Predicted: {pred_label}", fill='blue')
+                    image.save(f"saved_samples/{MODEL_NAME}/{num}.jpg")
 
         # loss and accuracy for a complete epoch
         epoch_acc = 100. * (running_correct / (counter*BATCH_SIZE))
@@ -164,33 +163,32 @@ class Model():
         for epoch in range(1, epochs+1):
 
             print(f"Epoch No: {epoch}")
-            # train_loss, train_acc = self.train(dataset=train_data, loss_func=crossEntropyLoss, optimizer=optimizer)
-            # val_acc = self.validate(dataset=val_data)
+            train_loss, train_acc = self.train(dataset=train_data, loss_func=crossEntropyLoss, optimizer=optimizer)
+            val_acc = self.validate(dataset=val_data)
             test_acc = self.test(dataset=test_data)
-            # train_loss_epochs.append(train_loss)
-            # val_acc_epochs.append(val_acc)
-            # test_acc_epochs.append(test_acc)
-            # print(f"Train Loss:{train_loss}, Train Accuracy:{train_acc}, Validation Accuracy:{val_acc}, Test Accuracy: {test_acc}")
+            train_loss_epochs.append(train_loss)
+            val_acc_epochs.append(val_acc)
+            test_acc_epochs.append(test_acc)
+            print(f"Train Loss:{train_loss}, Train Accuracy:{train_acc}, Validation Accuracy:{val_acc}, Test Accuracy: {test_acc}")
             print(f"Test Accuracy: {test_acc}")
 
-            # if max(test_acc_epochs) == test_acc:
-            #     torch.save({
-            #     'epoch': epoch,
-            #     'model_state_dict': self.model.state_dict(),
-            #     'optimizer_state_dict': optimizer.state_dict(),
-            #     'train_loss': train_loss,
-            #     }, f"checkpoints/{MODEL_NAME}.tar")
+            if max(test_acc_epochs) == test_acc:
+                torch.save({
+                'epoch': epoch,
+                'model_state_dict': self.model.state_dict(),
+                'optimizer_state_dict': optimizer.state_dict(),
+                'train_loss': train_loss,
+                }, f"checkpoints/{MODEL_NAME}.tar")
 
-
-            # writer.add_scalar("Loss/train", train_loss, epoch)
-            # writer.add_scalar("Accuracy/train", train_acc, epoch)
-            # writer.add_scalar("Accuracy/val", val_acc, epoch)
-            # writer.add_scalar("Accuracy/Test", test_acc, epoch)
+            writer.add_scalar("Loss/train", train_loss, epoch)
+            writer.add_scalar("Accuracy/train", train_acc, epoch)
+            writer.add_scalar("Accuracy/val", val_acc, epoch)
+            writer.add_scalar("Accuracy/Test", test_acc, epoch)
             
-            # if epoch%10==0:
-            #     print("Saving model")
-            #     torch.save(self.model.state_dict(), f"saved_model/{MODEL_NAME}_{epoch}.pth")
-            #     print("Model Saved")
+            if epoch%10==0:
+                print("Saving model")
+                torch.save(self.model.state_dict(), f"saved_model/{MODEL_NAME}_{epoch}.pth")
+                print("Model Saved")
     
             print("Epoch Completed. Proceeding to next epoch...")
 
@@ -237,7 +235,6 @@ class Model():
 
     def infer_a_sample(self, image):
         
-        image = torch.load("name.pt")
         image = image.to(DEVICE)
 
         # Forward pass the image through the model.
@@ -254,7 +251,7 @@ class Model():
 
 
 
-model = Model(trained=True)
+model = Model()
 model.fit(400, 1e-5)
  
 
