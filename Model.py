@@ -234,14 +234,9 @@ class Model():
 
 
 
+
     def infer_a_sample(self, image):
-        # Convert the image to a tensor.
-        image = torch.from_numpy(image).float().to(DEVICE)
-
-        # Preprocess the image.
-        image = image.unsqueeze(0)
-        image = image.permute(0, 3, 1, 2)
-
+        
         # Forward pass the image through the model.
         prediction = self.model(image)
 
@@ -251,6 +246,8 @@ class Model():
         # Get the class name.
         class_name = self.classes[class_index.item()]
         return class_name
+
+
 
 
 
