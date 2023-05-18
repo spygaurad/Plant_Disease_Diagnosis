@@ -109,9 +109,9 @@ class Model():
         with torch.no_grad():
             for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
                 img, label = img.to(DEVICE), label.to(DEVICE)
-                outputs = self.model(img)
-                torch.save(outputs, "name.pt")
+                torch.save(img, "name.pt")
                 exit()
+                outputs = self.model(img)
                 #calculate accuracy
                 pred = outputs.argmax(1)
                 correct = pred == label
@@ -255,8 +255,8 @@ class Model():
 
 
 
-# model = Model(trained=True)
-# model.fit(400, 1e-5)
+model = Model(trained=True)
+model.fit(400, 1e-5)
  
 
 # for i in range(10):
