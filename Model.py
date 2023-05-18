@@ -26,21 +26,8 @@ class Model():
 
     def __init__(self, trained=False):
         self.model = EfficientNet().to(DEVICE)
-        if trained:
-            self.model.load_state_dict(torch.load('saved_model/TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_4_190.pth', map_location=torch.device(DEVICE)))
-
-        self.classes = {
-            0: "Tomato Bacterial Spot", 
-            1: "Tomato Early Blight", 
-            2: "Tomato Healthy", 
-            3: "Tomato Late Blight", 
-            4: "Tomato Leaf Mold", 
-            5: "Tomato Septoria Leaf Spot", 
-            6: "Tomato Spider Mites", 
-            7: "Tomato Target Spot", 
-            8: "Tomato Mosiac Virus",
-            9: "Tomato Yellow Leaf Curl",
-        }
+        if trained: self.model.load_state_dict(torch.load('saved_model/TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_4_190.pth', map_location=torch.device(DEVICE)))
+        self.classes = { 0: "Tomato Bacterial Spot", 1: "Tomato Early Blight", 2: "Tomato Healthy", 3: "Tomato Late Blight", 4: "Tomato Leaf Mold", 5: "Tomato Septoria Leaf Spot", 6: "Tomato Spider Mites", 7: "Tomato Target Spot", 8: "Tomato Mosiac Virus", 9: "Tomato Yellow Leaf Curl", }
 
 
 
