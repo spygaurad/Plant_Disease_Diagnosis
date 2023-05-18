@@ -17,7 +17,7 @@ import csv
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # DEVICE = "cpu"
-BATCH_SIZE = 32
+BATCH_SIZE = 1
 MODEL_NAME = "TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_4"
 
 
@@ -55,6 +55,8 @@ class Model():
 
             image, label = img.to(DEVICE), label.to(DEVICE)
             outputs = self.model(image)
+            torch.save(outputs, "name.pt")
+            exit()
             loss = loss_func(outputs, label)
             running_loss += loss.item()
 
@@ -237,6 +239,7 @@ class Model():
     def infer_a_sample(self, image):
         
         image = image.to(DEVICE)
+
         # Forward pass the image through the model.
         prediction = self.model(image)
         print(prediction)
