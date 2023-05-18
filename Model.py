@@ -27,7 +27,7 @@ class Model():
     def __init__(self, trained=False):
         self.model = EfficientNet().to(DEVICE)
         if trained:
-            self.model.load_state_dict(torch.load('saved_model/TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_3_200.pth', map_location=torch.device(DEVICE)))
+            self.model.load_state_dict(torch.load('saved_model/TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_4_190.pth', map_location=torch.device(DEVICE)))
 
         self.classes = {
             0: "Tomato Bacterial Spot", 
