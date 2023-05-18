@@ -252,7 +252,7 @@ class Model():
 
 
 model = Model()
-model.fit(400, 1e-5)
+model.fit(250, 1e-5)
  
 
 # for i in range(10):
