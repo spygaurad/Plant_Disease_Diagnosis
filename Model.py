@@ -109,8 +109,6 @@ class Model():
         with torch.no_grad():
             for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
                 img, label = img.to(DEVICE), label.to(DEVICE)
-                torch.save(img, "name.pt")
-                exit()
                 outputs = self.model(img)
                 print(outputs)
                 #calculate accuracy
@@ -240,7 +238,6 @@ class Model():
     def infer_a_sample(self, image):
         
         image = image.to(DEVICE)
-        image = torch.load('name.pt')
         # Forward pass the image through the model.
         prediction = self.model(image)
         print(prediction)
