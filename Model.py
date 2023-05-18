@@ -55,8 +55,6 @@ class Model():
 
             image, label = img.to(DEVICE), label.to(DEVICE)
             outputs = self.model(image)
-            torch.save(outputs, "name.pt")
-            exit()
             loss = loss_func(outputs, label)
             running_loss += loss.item()
 
@@ -112,6 +110,8 @@ class Model():
             for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
                 img, label = img.to(DEVICE), label.to(DEVICE)
                 outputs = self.model(img)
+                torch.save(outputs, "name.pt")
+                exit()
                 #calculate accuracy
                 pred = outputs.argmax(1)
                 correct = pred == label
@@ -166,8 +166,8 @@ class Model():
         for epoch in range(1, epochs+1):
 
             print(f"Epoch No: {epoch}")
-            train_loss, train_acc = self.train(dataset=train_data, loss_func=crossEntropyLoss, optimizer=optimizer)
-            val_acc = self.validate(dataset=val_data)
+            # train_loss, train_acc = self.train(dataset=train_data, loss_func=crossEntropyLoss, optimizer=optimizer)
+            # val_acc = self.validate(dataset=val_data)
             test_acc = self.test(dataset=test_data)
             train_loss_epochs.append(train_loss)
             val_acc_epochs.append(val_acc)
