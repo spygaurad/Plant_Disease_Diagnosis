@@ -59,11 +59,6 @@ for folder in folders:
     train_files.extend(filtered_test_files[:num_train_excluded])
     valid_files.extend(filtered_test_files[num_train_excluded:])
 
-    # Shuffle the train and valid files separately
-    train_files = random.shuffle(train_files)
-    valid_files = random.shuffle(valid_files)
-    test_files = random.shuffle(test_files)
-
     # Write the file paths and class names to the train and valid CSV files
     for file in train_files:
         train_writer.writerow([os.path.join(folder_path, file), folder])
