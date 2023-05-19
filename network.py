@@ -12,6 +12,4 @@ class EfficientNet(nn.Module):
 # device = "cuda:0" if torch.cuda.is_available() else "cpu"
 # input = torch.rand(4, 3, 224, 224).to(device)
 # model = EfficientNet().to(device)
-# print(model)
 # output = model(input)
-# print(output.shape)
