@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # DEVICE = "cpu"
-BATCH_SIZE = 8
+BATCH_SIZE = 1
 MODEL_NAME = "TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_5"
 
 
@@ -53,20 +53,7 @@ class Model():
         for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
 
             optimizer.zero_grad()
-            # image = img[0, :, :, :].cpu().numpy().transpose((1, 2, 0))
-            # plt.imshow(image)
             image, label = img.to(DEVICE), label.to(DEVICE)
-            # sample = random.randint(0, BATCH_SIZE//2)
-            # image = (image * 255).astype('uint8')
-            # image = Image.fromarray(image)
-            # draw = ImageDraw.Draw(image)
-            # real_label = self.classes[label[sample].item()]
-            # pred_label = self.classes[pred[sample].item()]
-            # draw.text((image.width - 200, 0), f"Real: {real_label}", fill='red')
-            # draw.text((image.width - 200, 20), f"Predicted: {pred_label}", fill='blue')
-            # image.save(f"saved_samples/iamge.jpg")
-
-
             outputs = self.model(image)
             loss = loss_func(outputs, label)
             running_loss += loss.item()

@@ -66,8 +66,8 @@ def get_dataloader(root_dir, batch_size):
     test_dataset = CustomDataset(os.path.join(root_dir, "test.csv"), transform=val_transform)  # Resize validation images to 224x224
 
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=1, shuffle=True)
-    test_loader = DataLoader(test_dataset, batch_size=1, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=True)
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
 
     # for element in train_loader:
     #     print(element)
