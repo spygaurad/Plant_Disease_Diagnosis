@@ -52,8 +52,9 @@ class Model():
 
         for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
 
-            image = img[0, :, :, :].cpu().numpy().transpose((1, 2, 0))
-            plt.imshow(image)
+            optimizer.zero_grad()
+            # image = img[0, :, :, :].cpu().numpy().transpose((1, 2, 0))
+            # plt.imshow(image)
             image, label = img.to(DEVICE), label.to(DEVICE)
             # sample = random.randint(0, BATCH_SIZE//2)
             # image = (image * 255).astype('uint8')
