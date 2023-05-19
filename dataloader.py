@@ -9,14 +9,25 @@ class CustomDataset(Dataset):
     def __init__(self, csv_file, transform=None):
         self.transform = transform
         self.data = []
-        self.class_to_idx = {}
+        self.class_to_idx = {
+            "Tomato Bacterial Spot": 0, 
+            "Tomato Early Blight": 1, 
+            "Tomato Healthy": 2, 
+            "Tomato Late Blight": 3, 
+            "Tomato Leaf Mold": 4, 
+            "Tomato Septoria Leaf Spot": 5, 
+            "Tomato Spider Mites": 6, 
+            "Tomato Target Spot": 7, 
+            "Tomato Mosiac Virus": 8,
+            "Tomato Yellow Leaf Curl": 9,
+        }
         with open(csv_file, 'r') as f:
             for row in f:
                 file_path, label = row.split(',')
-                label = label.strip()  
-                if label not in self.class_to_idx:
-                    self.class_to_idx[label] = len(self.class_to_idx)
+                label = label.strip()
+                print(label)  
                 label_idx = self.class_to_idx[label]
+                print(label_idx)
                 self.data.append((file_path, label_idx))
 
     def __getitem__(self, index):
