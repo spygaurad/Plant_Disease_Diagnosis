@@ -18,7 +18,7 @@ class CustomDataset(Dataset):
             "Tomato Septoria Leaf Spot": 5, 
             "Tomato Spider Mites": 6, 
             "Tomato Target Spot": 7, 
-            "Tomato Mosiac Virus": 8,
+            "Tomato Mosaic Virus": 8,
             "Tomato Yellow Leaf Curl": 9,
         }
         with open(csv_file, 'r') as f:
