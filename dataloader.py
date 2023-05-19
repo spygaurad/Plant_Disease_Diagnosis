@@ -41,7 +41,7 @@ class CustomDataset(Dataset):
             print(file_path)
 
     def __len__(self):
-        return len(self.data[:200])
+        return len(self.data)
 
 
 
