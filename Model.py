@@ -17,7 +17,7 @@ import csv
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # DEVICE = "cpu"
-BATCH_SIZE = 4
+BATCH_SIZE = 8
 MODEL_NAME = "TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_5"
 
 
@@ -104,7 +104,7 @@ class Model():
         counter = 0
 
         # num = random.randint(0, len(dataset)-1)
-
+        self.model.eval()
         with torch.no_grad():
             for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
                 img, label = img.to(DEVICE), label.to(DEVICE)
@@ -238,6 +238,7 @@ class Model():
         image = image.to(DEVICE)
 
         # Forward pass the image through the model.
+        self.model.eval()
         prediction = self.model(image)
         print(prediction)
         # Get the class with the highest probability.
