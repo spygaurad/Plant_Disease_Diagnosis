@@ -24,10 +24,6 @@ train_writer = csv.writer(train_file)
 valid_writer = csv.writer(valid_file)
 test_writer = csv.writer(test_file)
 
-# Write the headers to the CSV files
-train_writer.writerow(["File Path", "Class"])
-valid_writer.writerow(["File Path", "Class"])
-test_writer.writerow(["File Path", "Class"])
 
 # Iterate over the folders
 for folder in folders:
@@ -64,9 +60,9 @@ for folder in folders:
     valid_files.extend(filtered_test_files[num_train_excluded:])
 
     # Shuffle the train and valid files separately
-    random.shuffle(train_files, inplace=True)
-    random.shuffle(valid_files, inplace=True)
-    random.shuffle(test_files, inplace=True)
+    train_files = random.shuffle(train_files)
+    valid_files = random.shuffle(valid_files)
+    test_files = random.shuffle(test_files)
 
     # Write the file paths and class names to the train and valid CSV files
     for file in train_files:
