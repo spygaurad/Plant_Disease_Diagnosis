@@ -62,6 +62,7 @@ class Model():
 
             # calculate accuracy
             pred = outputs.argmax(1)
+            print(label, pred)
             correct = pred == label
             running_correct += correct.sum().item()
             counter += 1
