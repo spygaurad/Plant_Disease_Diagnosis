@@ -37,8 +37,8 @@ class CustomDataset(Dataset):
 def get_dataloader(root_dir, batch_size):
 
     train_transform = transforms.Compose([
-        RandomRotation(degrees=45), 
-        RandomAffine(degrees=0, shear=10),  # Random skewness and shear up to 10 degrees
+        # RandomRotation(degrees=45), 
+        # RandomAffine(degrees=0, shear=10),  # Random skewness and shear up to 10 degrees
         Resize((224, 224)),  # Resize to 224x224
         ToTensor(),  # Convert to tensor
         # Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
