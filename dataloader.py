@@ -25,9 +25,7 @@ class CustomDataset(Dataset):
             for row in f:
                 file_path, label = row.split(',')
                 label = label.strip()
-                print(label)  
                 label_idx = self.class_to_idx[label]
-                print(label_idx)
                 self.data.append((file_path, label_idx))
 
     def __getitem__(self, index):
