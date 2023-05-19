@@ -37,8 +37,8 @@ class Model():
             5: "Tomato Septoria Leaf Spot", 
             6: "Tomato Spider Mites", 
             7: "Tomato Target Spot", 
-            8: "Tomato Mosiac Virus",
-            9: "Tomato Yellow Leaf Curl",
+            8: "Tomato Mosaic Virus",
+            9: "Tomato Yellow Leaf Curl Virus",
         }
 
 
