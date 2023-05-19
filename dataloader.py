@@ -41,13 +41,13 @@ def get_dataloader(root_dir, batch_size):
         RandomAffine(degrees=0, shear=10),  # Random skewness and shear up to 10 degrees
         Resize((224, 224)),  # Resize to 224x224
         ToTensor(),  # Convert to tensor
-        Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        # Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
 
     val_transform = transforms.Compose([
         Resize((224, 224)),
         ToTensor(),
-        Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        # Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
 
     train_dataset = CustomDataset(os.path.join(root_dir, "train.csv"), transform=train_transform)
