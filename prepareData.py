@@ -64,9 +64,9 @@ for folder in folders:
     valid_files.extend(filtered_test_files[num_train_excluded:])
 
     # Shuffle the train and valid files separately
-    random.shuffle(train_files)
-    random.shuffle(valid_files)
-    random.shuffle(test_files)
+    random.shuffle(train_files, inplace=True)
+    random.shuffle(valid_files, inplace=True)
+    random.shuffle(test_files, inplace=True)
 
     # Write the file paths and class names to the train and valid CSV files
     for file in train_files:
