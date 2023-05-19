@@ -12,7 +12,7 @@ from PIL import Image
 from torchvision.transforms import transforms
 from tensorboardX import SummaryWriter
 import csv
-
+import matplotlib.pyplot as plt
 
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -52,7 +52,20 @@ class Model():
 
         for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
 
+            img = img[0, :, :, :].cpu().numpy().transpose((1, 2, 0))
+            plt.show(img)
             image, label = img.to(DEVICE), label.to(DEVICE)
+            # sample = random.randint(0, BATCH_SIZE//2)
+            # image = (image * 255).astype('uint8')
+            # image = Image.fromarray(image)
+            # draw = ImageDraw.Draw(image)
+            # real_label = self.classes[label[sample].item()]
+            # pred_label = self.classes[pred[sample].item()]
+            # draw.text((image.width - 200, 0), f"Real: {real_label}", fill='red')
+            # draw.text((image.width - 200, 20), f"Predicted: {pred_label}", fill='blue')
+            # image.save(f"saved_samples/iamge.jpg")
+
+
             outputs = self.model(image)
             loss = loss_func(outputs, label)
             running_loss += loss.item()
