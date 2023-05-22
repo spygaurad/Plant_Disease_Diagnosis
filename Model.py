@@ -135,7 +135,7 @@ class Model():
                 #     image.save(f"saved_samples/{MODEL_NAME}/{num}.jpg")
 
         # loss and accuracy for a complete epoch
-        epoch_acc = 100. * (running_correct / (counter))
+        epoch_acc = 100. * (running_correct / (counter*BATCH_SIZE))
     
         return epoch_acc
 
