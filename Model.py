@@ -188,10 +188,10 @@ class Model():
             writer.add_scalar("Accuracy/val", val_acc, epoch)
             writer.add_scalar("Accuracy/Test", test_acc, epoch)
             
-            if epoch%10==0:
-                print("Saving model")
-                torch.save(self.model.state_dict(), f"saved_model/{MODEL_NAME}_{epoch}.pth")
-                print("Model Saved")
+            
+            print("Saving model")
+            torch.save(self.model.state_dict(), f"saved_model/{MODEL_NAME}_{epoch}.pth")
+            print("Model Saved")
     
             print("Epoch Completed. Proceeding to next epoch...")
 
