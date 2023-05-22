@@ -95,7 +95,7 @@ class Model():
                 running_correct += correct.sum().item()
 
         # loss and accuracy for a complete epoch
-        epoch_acc = 100. * (running_correct / (counter))
+        epoch_acc = 100. * (running_correct / (counter)*BATCH_SIZE)
         return epoch_acc
 
 
