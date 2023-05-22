@@ -17,8 +17,8 @@ import matplotlib.pyplot as plt
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # DEVICE = "cpu"
-BATCH_SIZE = 1
-MODEL_NAME = "TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_5"
+BATCH_SIZE = 8
+MODEL_NAME = "TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_6"
 
 
 
@@ -26,7 +26,7 @@ class Model():
 
     def __init__(self, trained=False):
         self.model = EfficientNet().to(DEVICE)
-        self.model.load_state_dict(torch.load('saved_model/TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_5_140.pth', map_location=torch.device(DEVICE)))
+        # self.model.load_state_dict(torch.load('saved_model/TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_5_140.pth', map_location=torch.device(DEVICE)))
         if trained: self.model.load_state_dict(torch.load('saved_model/TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_4_190.pth', map_location=torch.device(DEVICE)))
 
         self.classes = {
