@@ -37,7 +37,6 @@ class CustomDataset(Dataset):
             return image, label
         except Exception as e:
             print(file_path)
-            continue
 
     def __len__(self):
         return len(self.data)
