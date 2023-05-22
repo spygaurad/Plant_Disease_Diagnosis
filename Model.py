@@ -53,6 +53,7 @@ class Model():
 
         for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
 
+            counter += 1
             optimizer.zero_grad()
             image, label = img.to(DEVICE), label.to(DEVICE)
             outputs = self.model(image)
@@ -67,11 +68,10 @@ class Model():
             # print(label, pred)
             correct = pred == label
             running_correct += correct.sum().item()
-            counter += 1
 
         # loss and accuracy for a complete epoch
-        epoch_loss = running_loss / (counter)
-        epoch_acc = 100. * (running_correct / (counter))
+        epoch_loss = running_loss / (counter*BATCH_SIZE)
+        epoch_acc = 100. * (running_correct / (counter*BATCH_SIZE))
 
         return epoch_loss, epoch_acc
 
@@ -85,6 +85,7 @@ class Model():
 
         with torch.no_grad():
             for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
+                counter += 1
                 img, label = img.to(DEVICE), label.to(DEVICE)
                 outputs = self.model(img)
 
@@ -92,7 +93,6 @@ class Model():
                 pred = outputs.argmax(1)
                 correct = pred == label
                 running_correct += correct.sum().item()
-                counter += 1
 
         # loss and accuracy for a complete epoch
         epoch_acc = 100. * (running_correct / (counter))
@@ -110,13 +110,13 @@ class Model():
         self.model.eval()
         with torch.no_grad():
             for i, (img, label) in tqdm(enumerate(dataset), total=len(dataset)):
+                counter += 1
                 img, label = img.to(DEVICE), label.to(DEVICE)
                 outputs = self.model(img)
                 #calculate accuracy
                 pred = outputs.argmax(1)
                 correct = pred == label
                 running_correct += correct.sum().item()
-                counter += 1
                 
                 # if i == num:
                 #     try:
