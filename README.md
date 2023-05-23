@@ -1,1 +1,1 @@
-http://ai.geokrishi.com
+http://ai.geokrishi.farm
