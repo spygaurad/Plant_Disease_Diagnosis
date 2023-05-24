@@ -20,7 +20,8 @@ def predict():
     image_file = Image.open(image_file).convert('RGB')
     image_file = transform(image_file).unsqueeze(0)
     output = model.infer_a_sample(image_file)
-    return output[0], output[1]
+    print(output)
+    return output
 
 
 if __name__ == '__main__':
