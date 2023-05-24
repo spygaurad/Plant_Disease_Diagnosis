@@ -243,7 +243,6 @@ class Model():
         # Forward pass the image through the model.
         prediction = nn.Softmax(dim=1)(self.model(image)).max(1)
         class_prob, class_index = round(prediction.values.item(), 3), prediction.indices.item()
-        print(class_index, class_prob)
         class_name = self.classes[class_index]
         return f'{class_name}: {class_prob*100}%'
 
