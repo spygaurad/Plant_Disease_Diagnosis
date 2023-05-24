@@ -237,22 +237,14 @@ class Model():
 
 
     def infer_a_sample(self, image):
-        
+
         image = image.to(DEVICE)
-
-        # Forward pass the image through the model.
         self.model.eval()
-        prediction = nn.Softmax(dim=1)(self.model(image))
-        # softmaxOption = nn.Softmax(dim=1)(prediction)
-        
-        
-        # Get the class with the highest probability.
-        class_index = softmaxOption.argmax(1)
-        classProb = softmaxOption.max(1)
-
-        # Get the class name.
-        class_name = self.classes[class_index.item()]
-        return class_name
+        # Forward pass the image through the model.
+        prediction = nn.Softmax(dim=1)(self.model(image)).max(1)
+        class_prob, class_index = round(prediction.values.item(), 3), prediction.indices.item()
+        class_name = self.classes[class_index]
+        return f'{class_name}: {class_prob*100}%'
 
 
 
