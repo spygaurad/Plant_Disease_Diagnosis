@@ -245,7 +245,7 @@ class Model():
         class_prob, class_index = round(prediction.values.item(), 3), prediction.indices.item()
         print(class_index, class_prob)
         class_name = self.classes[class_index]
-        return class_name, class_prob*100
+        return f'{class_name}: {class_prob*100}%'
 
 
 
