@@ -242,16 +242,16 @@ class Model():
 
         # Forward pass the image through the model.
         self.model.eval()
-        prediction = nn.Softmax(dim=1)(self.model(image))
-        print(prediction)
+        prediction = nn.Softmax(dim=1)(self.model(image)).max(1)
         # Get the class with the highest probability.
-        class_index = prediction.argmax(1)
-        class_prob = prediction.max(1)
+        # class_index = prediction.argmax(1)
+        class_prob = prediction.values.item()
+        class_index = prediction.indices.item()
         print(class_index, class_prob)
 
         # Get the class name.
-        class_name = self.classes[class_index.item()]
-        return class_name
+        class_name = self.classes[class_index]
+        return class_name, class_prob
 
 
 
