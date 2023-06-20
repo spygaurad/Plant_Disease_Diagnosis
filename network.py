@@ -19,3 +19,21 @@ class EfficientNet(nn.Module):
 # input = torch.rand(4, 3, 224, 224).to(device)
 # model = EfficientNet().to(device)
 # output = model(input)
+
+
+class DomainAdaptiveNet(nn.Module):
+    def __init__(self):
+        super(DomainAdaptiveNet, self).__init__()
+        self.effnet = EfficientNet()
+        self.effnet.load_state_dict(torch.load('saved_model/TOMATO_LEAF_PLANTVILLAGE_EFFICIENTNET_10CLASSES_V1_6_10.pth', map_location=torch.device(DEVICE)))
+        self.shared_layers = self.effnet.model
+        self.classificationLayer = nn.Sequential(self.effnet.outlayer(self.effnet.relu(self.effnet.preFinal())))
+        self.domainClassificationLayer = nn.Sequential(nn.Linear(64, 32), nn.ReLU, nn.Linear(32, 8), nn.ReLU(8, 2))
+
+    
+    def forward(self, x):
+        shared_features = self.effnet(x)
+        diseaseClass = self.classificationLayer(x)
+        domain = self.domainClassificationLayer(x)
+
+        return shared_features, diseaseClass, domain
