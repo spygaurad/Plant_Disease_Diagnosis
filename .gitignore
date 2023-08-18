@@ -2,3 +2,9 @@ saved_model/
 env/
 sajilodoctor.geokrishi.farm.cer
 __pycache__/
+segmented masks/
+croppped_images/
+runs/
+mobile_sam.pt
+sam_b.pt
+croppped_images/
