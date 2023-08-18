@@ -91,7 +91,7 @@ if promptable:
         predictor.set_image(image_path)
         bounding_boxes = getBoundingBoxes(image_path)
 else:
-    results = predictor(source=image_path, crop_n_layers=1, points_stride=64)
+    results = predictor(source=image_path, crop_n_layers=1, points_stride=16)
 
 segmentation_masks = []
 masks = results[0].masks
