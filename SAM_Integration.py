@@ -76,7 +76,7 @@ def on_mouse(event, x, y, flags, param, base_name):
 
 # %%
 
-overrides = dict(conf=0.25, task='segment', mode='predict', imgsz=512, model="mobile_sam.pt", device='cpu')
+overrides = dict(conf=0.25, task='segment', mode='predict', imgsz=512, model="mobile_sam.pt", device='cuda')
 predictor = SAMPredictor(overrides=overrides)
 
 image_path = "tomato.jpg"
