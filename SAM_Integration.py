@@ -82,8 +82,8 @@ overrides = dict(conf=0.25, task='segment', mode='predict', imgsz=512, model="mo
 predictor = SAMPredictor(overrides=overrides)
 
 image_path = "tomato.jpg"
-promptable = True
-prompt = 'even_points'
+promptable = False
+prompt = 'bbox'
 output_dir = "segmented masks"
 os.makedirs(output_dir, exist_ok=True)
 
