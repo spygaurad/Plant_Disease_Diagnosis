@@ -13,7 +13,7 @@ from PIL import Image
 import os
 import functools
 import cv2
-# torch.cuda.get_device_name(0)
+torch.cuda.get_device_name(0)
 
 
 #In[]
