@@ -9,8 +9,10 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from matplotlib.widgets import RectangleSelector
 from matplotlib.backend_tools import ToolBase
+from PIL import Image
 import os
 import functools
+import cv2
 # torch.cuda.get_device_name(0)
 
 
@@ -80,8 +82,8 @@ overrides = dict(conf=0.25, task='segment', mode='predict', imgsz=512, model="mo
 predictor = SAMPredictor(overrides=overrides)
 
 image_path = "tomato.jpg"
-promptable = False
-prompt = 'bbox'
+promptable = True
+prompt = 'even_points'
 output_dir = "segmented masks"
 os.makedirs(output_dir, exist_ok=True)
 
@@ -90,47 +92,76 @@ if promptable:
         base_name, extension = os.path.splitext(image_path)
         predictor.set_image(image_path)
         bounding_boxes = getBoundingBoxes(image_path)
+        results = predictor(bboxes=bounding_boxes)
+        generate_mask(results)
+    elif prompt == 'even_points':
+        image = Image.open(image_path)
+        image_width, image_height = image.size
+        num_points_height = 10
+        num_points_width = 10
+        step_size_height = image_height // (num_points_height + 1)
+        step_size_width = image_width // (num_points_width + 1)
+        point_coordinates = []
+        for i in range(1, num_points_height + 1):
+            for j in range(1, num_points_width + 1):
+                x = j * step_size_width
+                y = i * step_size_height
+                point_coordinates.append([x, y])
+        image_np = np.array(image)
+        for point in point_coordinates:
+            cv2.circle(image_np, point, 20, (255, 53, 200), -1)
+        image_resized = cv2.resize(image_np, (image_width // 5, image_height // 5))
+        cv2.imshow("Image with Points", image_resized)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+        print(point_coordinates)
+        for points in point_coordinates:
+            results = predictor(points=points, labels=[1])
+            generate_mask(results)
 else:
     results = predictor(source=image_path, crop_n_layers=1, points_stride=16)
 
-segmentation_masks = []
-masks = results[0].masks
-for mask_idx, mask in enumerate(masks, start=1):
 
-    mask_array = mask.data.cpu().numpy().astype(np.uint8) * 255
-    # sel_image = image.copy()
-    image = results[0].orig_img.copy()
-    white_pixels = mask_array[0] == 255
+def generate_mask(results):
 
-    image[~white_pixels] = 0
+    segmentation_masks = []
+    masks = results[0].masks
+    for mask_idx, mask in enumerate(masks, start=1):
 
-    contours, _ = cv2.findContours(mask_array[0], cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    for contour in contours:
-        x, y, w, h = cv2.boundingRect(contour)
-        
-        cropped_object = image[y:y+h, x:x+w]
-        cropped_object = cv2.resize(cropped_object, (512, 512))
+        mask_array = mask.data.cpu().numpy().astype(np.uint8) * 255
+        # sel_image = image.copy()
+        image = results[0].orig_img.copy()
+        white_pixels = mask_array[0] == 255
 
-        button_width = 100
-        button_height = 50
-        cv2.namedWindow(f"Cropped_Object_{mask_idx}", cv2.WINDOW_NORMAL)
+        image[~white_pixels] = 0
 
-        on_mouse_with_image_path = functools.partial(on_mouse, base_name=os.path.splitext(os.path.basename(image_path))[0])
-        cv2.setMouseCallback(f"Cropped_Object_{mask_idx}", on_mouse_with_image_path)
+        contours, _ = cv2.findContours(mask_array[0], cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        for contour in contours:
+            x, y, w, h = cv2.boundingRect(contour)
 
-        window_height = cropped_object.shape[0] + button_height
-        window_width = cropped_object.shape[1] + button_width * 2
-        combined_window = np.zeros((window_height, window_width, 3), dtype=np.uint8)
+            cropped_object = image[y:y+h, x:x+w]
+            cropped_object = cv2.resize(cropped_object, (512, 512))
 
-        combined_window[:cropped_object.shape[0], :cropped_object.shape[1]] = cropped_object
+            button_width = 100
+            button_height = 50
+            cv2.namedWindow(f"Cropped_Object_{mask_idx}", cv2.WINDOW_NORMAL)
 
-        cv2.putText(combined_window, "Skip", (10, window_height - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
-        cv2.putText(combined_window, "Save", (cropped_object.shape[1] + 10, window_height - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            on_mouse_with_image_path = functools.partial(on_mouse, base_name=os.path.splitext(os.path.basename(image_path))[0])
+            cv2.setMouseCallback(f"Cropped_Object_{mask_idx}", on_mouse_with_image_path)
 
-        cv2.imshow(f"Cropped_Object_{mask_idx}", combined_window)
+            window_height = cropped_object.shape[0] + button_height
+            window_width = cropped_object.shape[1] + button_width * 2
+            combined_window = np.zeros((window_height, window_width, 3), dtype=np.uint8)
 
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+            combined_window[:cropped_object.shape[0], :cropped_object.shape[1]] = cropped_object
+
+            cv2.putText(combined_window, "Skip", (10, window_height - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+            cv2.putText(combined_window, "Save", (cropped_object.shape[1] + 10, window_height - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+            cv2.imshow(f"Cropped_Object_{mask_idx}", combined_window)
+
+            cv2.waitKey(0)
+            cv2.destroyAllWindows()
 
 
 
