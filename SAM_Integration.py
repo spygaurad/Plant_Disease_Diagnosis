@@ -108,12 +108,12 @@ if promptable:
                 y = i * step_size_height
                 point_coordinates.append([x, y])
         image_np = np.array(image)
-        for point in point_coordinates:
-            cv2.circle(image_np, point, 20, (255, 53, 200), -1)
-        image_resized = cv2.resize(image_np, (image_width // 5, image_height // 5))
-        cv2.imshow("Image with Points", image_resized)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        # for point in point_coordinates:
+        #     cv2.circle(image_np, point, 20, (255, 53, 200), -1)
+        # image_resized = cv2.resize(image_np, (image_width // 5, image_height // 5))
+        # cv2.imshow("Image with Points", image_resized)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
         print(point_coordinates)
         for points in point_coordinates:
             results = predictor(points=points, labels=[1])
